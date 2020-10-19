@@ -33,6 +33,7 @@ namespace contractorserver.Repositories
       INSERT INTO contractors
       (name, address, contactPhone)
       VALUES
+      (@Name, @Address, @ContactPhone);
       SELECT LAST_INSERT_ID();";
       int id = _db.ExecuteScalar<int>(sql, newCon);
       newCon.Id = id;

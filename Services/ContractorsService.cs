@@ -39,6 +39,7 @@ namespace contractorserver.Services
       var data = GetById(updated.Id);
       updated.Name = updated.Name != null ? updated.Name : data.Name;
       updated.Address = updated.Address != null ? updated.Address : data.Address;
+      updated.ContactPhone = updated.ContactPhone > 0 ? updated.ContactPhone : data.ContactPhone;
       return _repo.Edit(updated);
     }
 
