@@ -9,9 +9,9 @@ namespace contractorserver.Controllers
     {
       private readonly BidsService _service;
 
-    public BidsController(BidsService service)
+    public BidsController(BidsService bs)
     {
-      _service = service;
+      _service = bs;
     }
   }
 }

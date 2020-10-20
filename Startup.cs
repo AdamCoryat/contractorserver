@@ -31,10 +31,18 @@ namespace contractorserver
         {
             services.AddControllers();
             services.AddScoped<IDbConnection>(x => CreateDbConnection());
+
             services.AddTransient<ContractorsService>();
             services.AddTransient<ContractorsRepository>();
+
             services.AddTransient<JobsService>();
             services.AddTransient<JobsRepository>();
+
+             services.AddTransient<BidsService>();
+            services.AddTransient<BidsRepository>();
+            
+             services.AddTransient<ReviewsService>();
+            services.AddTransient<ReviewsRepository>();
 
         }
 

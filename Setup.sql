@@ -32,5 +32,39 @@ USE harbinger666;
 /* INSERT INTO jobs (location, description, contactPhone, startDate, timeEst) VALUES ("234 E. Second Ave.","Build a Bowling Ally.", "2081234567","12/1/2020", "10 Days" );
 INSERT INTO jobs (location, description, contactPhone, startDate, timeEst) VALUES ("123 E. First Ave.","Build a Bowling Ally.", "2081234567","12/10/2020", "10 Days" ); */
 
-SELECT * FROM jobs
+/* SELECT * FROM jobs */
+
+/* CREATE TABLE reviews
+(
+  id INT AUTO_INCREMENT,
+  title VARCHAR(255) NOT NULL,
+  body VARCHAR(255) NOT NULL,
+  rating INT,
+  dateStamp VARCHAR(255),
+  contractorId INT,
+  PRIMARY KEY (id),
+
+  INDEX (contractorId),
+
+  FOREIGN KEY (contractorId)
+    REFERENCES contractors (id)
+    ON DELETE CASCADE 
+); */
+
+/* CREATE TABLE bids
+(
+  id INT AUTO_INCREMENT,
+  jobId INT,
+  contractorId INT,
+  bidPrice DECIMAL(9,2),
+  PRIMARY KEY (id),
+
+  FOREIGN KEY (contractorId)
+    REFERENCES contractors (id)
+    ON DELETE CASCADE,
+
+  FOREIGN KEY (jobId)
+    REFERENCES jobs (id)
+    ON DELETE CASCADE
+); */
 
