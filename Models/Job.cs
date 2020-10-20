@@ -9,4 +9,9 @@ namespace contractorserver.Models
         public string TimeEst { get; set; }
         public int Id { get; set; }
     }
+    public class JobBidViewModel : Job
+    {
+        public int BidId { get; set; }
+        public double BidRate { get; set; }
+    }
 }

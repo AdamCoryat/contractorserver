@@ -10,6 +10,15 @@ namespace contractorserver.Models
     public string Address { get; set; }
     public int ContactPhone { get; set; }
     public int Id { get; set; }
-    // public List<Skills> Skills { get => skills; set => skills = value; }
+    public Skills Skills { get; set; }
   }
+  public enum Skills
+    {
+      Electrical,
+      HVAC,
+      DryWall,
+      Plumbing,
+      Siding,
+      Roofing
+    }
 }

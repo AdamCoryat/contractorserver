@@ -23,7 +23,7 @@ namespace contractorserver.Repositories
 
     internal Contractor GetById(int id)
     {
-      string sql = "SELECT * FROM contractors WHERE id = @id";
+      string sql = "SELECT * FROM contractors WHERE id = @id LIMIT 1";
       return _db.QueryFirstOrDefault<Contractor>(sql, new {id});
     }
 
@@ -55,7 +55,7 @@ namespace contractorserver.Repositories
 
     internal void Delete(int id)
     {
-      string sql = "DELETE FROM contractors WHERE id = @id";
+      string sql = "DELETE FROM contractors WHERE id = @id LIMIT 1";
       _db.Execute(sql, new {id});
     }
   }
