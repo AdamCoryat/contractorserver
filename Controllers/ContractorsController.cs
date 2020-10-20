@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using contractorserver.Models;
 using contractorserver.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +11,12 @@ namespace contractorserver.Controllers
     public class ContractorsController : ControllerBase
     {
       private readonly ContractorsService _service;
+      private readonly ReviewsService _revService;
 
-    public ContractorsController(ContractorsService cs)
+    public ContractorsController(ContractorsService cs, ReviewsService rs)
     {
       _service = cs;
+      _revService = rs;
     }
 
     [HttpGet]
@@ -39,6 +42,18 @@ namespace contractorserver.Controllers
       catch (Exception e)
       {
        return BadRequest(e.Message);
+      }
+    }
+    [HttpGet("{id}/reviews")]
+    public ActionResult<IEnumerable<Review>> GetReviews(int id)
+    {
+      try
+      {
+        return Ok(_revService.GetByContractorId(id));
+      }
+      catch (Exception e) 
+      {
+        return BadRequest(e.Message);
       }
     }
 
