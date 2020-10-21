@@ -51,5 +51,10 @@ namespace contractorserver.Services
       _repo.Delete(id);
       return "Successfully Deleted!";
     }
+
+    internal IEnumerable<JobBidViewModel> GetJobsByContractorId(int id)
+    {
+      return _repo.GetJobsByContractorId(id);
+    }
   }
 }
