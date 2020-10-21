@@ -13,17 +13,21 @@ namespace contractorserver.Services
       _repo = repo;
     }
 
-    internal void Create(Bid newBid)
+    internal void Create(Bid newBid, Profile userInfo)
     {
+      if(newBid.CreatorId != userInfo.Id)
+      {
+        throw new Exception("Invalid Permissions UnAuthorized");
+      }
       _repo.Create(newBid);
     }
 
-    internal void Delete(int id)
+    internal void Delete(int id, Profile userInfo)
     {
       var data = _repo.GetById(id);
-      if(data == null)
+      if(data.CreatorId != userInfo.Id)
       {
-        throw new Exception("Inavlid Id");
+        throw new Exception("Invalid Permissions to Delete");
       }
       _repo.Delete(id);
     }

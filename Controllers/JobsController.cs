@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CodeWorks.Auth0Provider;
 using contractorserver.Models;
@@ -13,10 +14,12 @@ namespace contractorserver.Controllers
     public class JobsController : ControllerBase
     {
         private readonly JobsService _service;
+        private readonly ContractorsService _conService;
 
-    public JobsController(JobsService js)
+    public JobsController(JobsService js, ContractorsService cs)
     {
       _service = js;
+      _conService = cs;
     }
 
     [HttpGet]
@@ -47,7 +50,18 @@ namespace contractorserver.Controllers
       }
     }
 
-
+    [HttpGet("{id}/contractors")]
+    public ActionResult<IEnumerable<ContractorBidViewModel>> GetContractors(int id)
+    {
+      try
+      {
+        return Ok(_conService.GetContractorsByJobId(id));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
     [HttpPost]
     [Authorize]
     public async Task<ActionResult<Job>> Create([FromBody] Job newJob)

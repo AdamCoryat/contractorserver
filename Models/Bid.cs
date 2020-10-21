@@ -6,6 +6,7 @@ namespace contractorserver.Models
         public int JobId { get; set; }
         public int ContractorId { get; set; }
         public double BidPrice { get; set; }
+        public string CreatorId { get; set; }
 
     }
 }

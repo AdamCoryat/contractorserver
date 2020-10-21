@@ -67,5 +67,17 @@ namespace contractorserver.Repositories
       string sql = "DELETE FROM contractors WHERE id = @id LIMIT 1";
       _db.Execute(sql, new {id});
     }
+
+    internal IEnumerable<ContractorBidViewModel> GetContractorsByJobId(int id)
+    {
+      string sql = @"
+        SELECT
+          c.*,
+          b.id AS BidId
+        FROM bids b
+        JOIN contractors c ON j.id = b.contractorId
+        WHERE jobId = @id"; 
+      return _db.Query<ContractorBidViewModel>(sql, new { id });
+    }
   }
 }

@@ -33,7 +33,7 @@ namespace contractorserver.Services
     {
       if(newJob.CreatorId != userInfo.Id)
       {
-        throw new Exception("Invalid Permissions");
+        throw new Exception("Invalid Permissions UnAuthorized");
       }
       return _repo.Create(newJob);
     }

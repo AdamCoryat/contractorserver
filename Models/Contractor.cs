@@ -23,4 +23,9 @@ namespace contractorserver.Models
       Siding,
       Roofing
     }
+     public class ContractorBidViewModel : Contractor
+    {
+        public int BidId { get; set; }
+        public double BidRate { get; set; }
+    }
 }

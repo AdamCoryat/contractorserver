@@ -17,13 +17,23 @@ namespace contractorserver.Repositories
 
     internal IEnumerable<Job> GetAll()
     {
-      string sql = "SELECT * FROM jobs";
-      return _db.Query<Job>(sql);
+      string sql = @"
+        SELECT
+        j.*,
+        p.*
+        FROM jobs j
+        JOIN profiles p ON j.creatorId = p.id";
+      return _db.Query<Job, Profile, Job>(sql, (job, profile)=> 
+      {
+        job.Creator = profile;
+        return job;
+      }, splitOn: "id");
+      
     }
 
     internal Job GetById(int id)
     {
-      string sql = "SELECT * FROM jobs WHERE id = @id";
+      string sql = "SELECT * FROM jobs WHERE id = @id LIMIT 1";
       return _db.QueryFirstOrDefault<Job>(sql, new {id});
     }
 
@@ -31,9 +41,9 @@ namespace contractorserver.Repositories
     {
       string sql = @"
       INSERT INTO jobs
-      (location, description, contactPhone, startDate, timeEst)
+      (location, description, contactPhone, startDate, timeEst, creatorId)
       VALUES
-      (@Location, @Description, @ContactPhone, @StartDate, @TimeEst);
+      (@Location, @Description, @ContactPhone, @StartDate, @TimeEst, @CreatorId);
       SELECT LAST_INSERT_ID();";
       int id = _db.ExecuteScalar<int>(sql, newJob);
       newJob.Id = id;
