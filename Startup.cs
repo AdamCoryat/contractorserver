@@ -57,6 +57,9 @@ namespace contractorserver
             services.AddControllers();
             services.AddScoped<IDbConnection>(x => CreateDbConnection());
 
+            services.AddTransient<ProfilesService>();
+            services.AddTransient<ProfilesRepository>();
+
             services.AddTransient<ContractorsService>();
             services.AddTransient<ContractorsRepository>();
 
