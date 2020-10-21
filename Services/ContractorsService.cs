@@ -37,15 +37,23 @@ namespace contractorserver.Services
     internal Contractor Edit(Contractor updated)
     {
       var data = GetById(updated.Id);
+      if(data.CreatorId != updated.CreatorId)
+      {
+        throw new Exception("Invalid Creator you do not have permissions");
+      }
       updated.Name = updated.Name != null ? updated.Name : data.Name;
       updated.Address = updated.Address != null ? updated.Address : data.Address;
       updated.ContactPhone = updated.ContactPhone > 0 ? updated.ContactPhone : data.ContactPhone;
       return _repo.Edit(updated);
     }
 
-    internal String Delete(int id)
+    internal String Delete(int id, string userId)
     {
       var data = GetById(id);
+      if(data.CreatorId != userId)
+      {
+        throw new Exception("Invalid Creator you do not have permissions");
+      }
       _repo.Delete(id);
       return "Successfully Deleted";
     }

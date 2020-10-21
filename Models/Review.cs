@@ -11,5 +11,6 @@ namespace contractorserver.Models
         public int Rating { get; set; }
         public string DateStamp { get; set; }
         public int ContractorId { get; set; }
+        public string CreatorId { get; set; }
     }
 }

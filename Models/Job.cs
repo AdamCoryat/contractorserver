@@ -8,6 +8,7 @@ namespace contractorserver.Models
         public string StartDate { get; set; }
         public string TimeEst { get; set; }
         public int Id { get; set; }
+        public string CreatorId { get; set; }
     }
     public class JobBidViewModel : Job
     {

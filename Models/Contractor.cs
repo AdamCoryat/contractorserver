@@ -11,6 +11,8 @@ namespace contractorserver.Models
     public int ContactPhone { get; set; }
     public int Id { get; set; }
     public Skills Skills { get; set; }
+    public string CreatorId { get; set; }
+    public Profile Creator { get; set; }
   }
   public enum Skills
     {

@@ -17,8 +17,17 @@ namespace contractorserver.Repositories
 
     internal IEnumerable<Contractor> GetAll()
     {
-      string sql = "SELECT * FROM contractors";
-      return _db.Query<Contractor>(sql);
+      string sql = @"
+      SELECT
+      c.*,
+      p.*
+      FROM contractors c
+      JOIN profiles p ON c.creatorId = p.id";
+    return _db.Query<Contractor, Profile, Contractor>(sql, (contractor, profile) => 
+    {
+      contractor.Creator = profile;
+      return contractor;
+    }, splitOn: "id");
     }
 
     internal Contractor GetById(int id)
@@ -31,9 +40,9 @@ namespace contractorserver.Repositories
     {
       string sql = @"
       INSERT INTO contractors
-      (name, address, contactPhone)
+      (name, address, contactPhone, creatorId)
       VALUES
-      (@Name, @Address, @ContactPhone);
+      (@Name, @Address, @ContactPhone, @CreatorId);
       SELECT LAST_INSERT_ID();";
       int id = _db.ExecuteScalar<int>(sql, newCon);
       newCon.Id = id;
