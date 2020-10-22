@@ -75,7 +75,7 @@ namespace contractorserver.Repositories
           c.*,
           b.id AS BidId
         FROM bids b
-        JOIN contractors c ON j.id = b.contractorId
+        JOIN contractors c ON c.id = b.contractorId
         WHERE jobId = @id"; 
       return _db.Query<ContractorBidViewModel>(sql, new { id });
     }
